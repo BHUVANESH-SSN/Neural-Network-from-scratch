@@ -139,14 +139,15 @@ b = b - α · db
 
 | Metric | Value |
 |--------|-------|
-| **Training Accuracy** | 85-90% |
-| **Validation Accuracy** | 83-88% |
+| **Training Accuracy** | 90-95% |
+| **Validation Accuracy** | 85-90% |
 | **Training Set Size** | 15,000 samples |
 | **Training Time** | ~30-50 seconds |
 | **Iterations** | 1000 |
 | **Learning Rate** | 0.15 |
 | **Hidden Neurons** | 128 |
 | **Data Type** | float32 (memory optimized) |
+<img width="580" height="527" alt="image" src="https://github.com/user-attachments/assets/0959b1be-ef16-45f8-ab93-b03fdbf17ba0" />
 
 ### Performance Tips
 
