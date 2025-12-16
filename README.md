@@ -6,7 +6,7 @@ A complete implementation of a neural network built from scratch using only NumP
 ![NumPy](https://img.shields.io/badge/numpy-1.19+-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## 📋 Table of Contents
+## Table of Contents
 - [Features](#features)
 - [Neural Network Architecture](#neural-network-architecture)
 - [Requirements](#requirements)
@@ -15,10 +15,16 @@ A complete implementation of a neural network built from scratch using only NumP
 - [Project Structure](#project-structure)
 - [How It Works](#how-it-works)
 - [Results](#results)
+- [ReLU Activation Unit](#relu-activation-unit)
 - [Visualizations](#visualizations)
+- [Testing Custom Handwritten Digits](#testing-custom-handwritten-digits)
 - [Learning Resources](#learning-resources)
+- [Customization](#customization)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+- [Contact](#contact)
 
-## ✨ Features
+## Features
 
 - **Pure NumPy Implementation**: No deep learning frameworks - built from mathematical foundations
 - **Comprehensive Visualizations**: 
@@ -31,7 +37,7 @@ A complete implementation of a neural network built from scratch using only NumP
 - **High Accuracy**: Achieves 85-92% accuracy on MNIST dataset
 - **Modular Design**: Clear separation of concerns with 11 distinct modules
 
-## 🧠 Neural Network Architecture
+## Neural Network Architecture
 
 ```
 Input Layer (784 neurons) → Hidden Layer (128 neurons, ReLU) → Output Layer (10 neurons, Softmax)
@@ -42,7 +48,7 @@ Input Layer (784 neurons) → Hidden Layer (128 neurons, ReLU) → Output Layer 
 - **Output Layer**: 10 neurons (digits 0-9) with Softmax activation
 - **Training**: Gradient descent with backpropagation
 
-## 📦 Requirements
+## Requirements
 
 - Python 3.8+
 - NumPy
@@ -50,7 +56,7 @@ Input Layer (784 neurons) → Hidden Layer (128 neurons, ReLU) → Output Layer 
 - Matplotlib
 - pillow (For custom Images)
 
-## 🚀 Installation
+## Installation
 
 1. **Clone the repository**
 ```bash
@@ -73,7 +79,7 @@ pip install numpy pandas matplotlib
    - Download `train.csv` from [Kaggle MNIST Dataset](https://www.kaggle.com/datasets/oddrationale/mnist-in-csv)
    - Place it in the project directory
 
-## 💻 Usage
+## Usage
 
 **Basic Usage:**
 ```bash
@@ -92,7 +98,7 @@ W1, b1, W2, b2 = train_network(
 )
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 NN_Scratch/
@@ -106,7 +112,7 @@ NN_Scratch/
 └── README.md                 # This file
 ```
 
-## 🔍 How It Works
+## How It Works
 
 ### 1. **Data Loading & Preprocessing**
 - Loads MNIST data from CSV
@@ -138,7 +144,7 @@ W = W - α · dW
 b = b - α · db
 ```
 
-## 📊 Results
+## Results
 
 | Metric | Value |
 |--------|-------|
@@ -174,7 +180,7 @@ b = b - α · db
 <img width="988" height="563" alt="image" src="https://github.com/user-attachments/assets/c80ea603-0653-4ec6-841b-90a1f81dbfd8" />
 
 ![ReLU](https://media.geeksforgeeks.org/wp-content/uploads/20250129162127770664/Relu-activation-function.png)
-## 🎨 Visualizations
+## Visualizations
 
 The code generates multiple visualizations:
 
@@ -199,7 +205,7 @@ The code generates multiple visualizations:
 
 
 
-## 🖼️ Testing Custom Handwritten Digits
+## Testing Custom Handwritten Digits
 
 ### How Pillow Works
 
@@ -231,7 +237,7 @@ test image 1: handwritten "8"
 ## Test Prediction Results
 <img width="1600" height="761" alt="image" src="https://github.com/user-attachments/assets/09e88d0d-6787-4992-bfc2-58ca7425f5a2" />
 
-## 📚 Learning Resources
+## Learning Resources
 
 **Key Concepts Implemented:**
 - Neural network fundamentals
@@ -243,7 +249,7 @@ test image 1: handwritten "8"
 - Loss calculation (Cross-entropy)
 
 
-## 🛠️ Customization
+## Customization
 
 ### Adjust Network Architecture
 ```python
@@ -265,7 +271,7 @@ train_network(
 ### Add More Layers
 You can extend the network to have multiple hidden layers by modifying the forward and backward propagation functions.
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **Low Accuracy (<75%)?**
 - Increase `hidden_size` to 128 or 256
@@ -284,11 +290,11 @@ You can extend the network to have multiple hidden layers by modifying the forwa
 - Decrease `hidden_size` if still facing issues
 - Close other memory-intensive applications
 
-## 📝 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 📧 Contact
+## Contact
 
 For questions or suggestions, please open an issue on GitHub.
 
