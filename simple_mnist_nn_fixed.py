@@ -1,7 +1,3 @@
-"""
-Simple MNIST Neural Network from Scratch
-Using only NumPy and basic math
-"""
 
 import numpy as np
 import pandas as pd
@@ -9,9 +5,6 @@ from matplotlib import pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
-# load mnist data and split into train/validation sets
-# read csv with digit images, shuffle randomly, split data
-# normalize pixel values from 0-255 to 0-1 range
 
 try:
     data = pd.read_csv('train.csv')
@@ -23,19 +16,16 @@ except FileNotFoundError:
 data = np.array(data)
 np.random.shuffle(data)
 
-# split first 1000 rows for validation
 data_dev = data[0:1000].T
 Y_dev = data_dev[0].astype(np.int32)
 X_dev = data_dev[1:].astype(np.float32)
 X_dev = X_dev / 255.0
 
-# rest of the data for training
 data_train = data[1000:].T
 Y_train = data_train[0].astype(np.int32)
 X_train = data_train[1:].astype(np.float32)
 X_train = X_train / 255.0
 
-# limit training samples to save memory (change to 20000 if you have more ram)
 max_train_samples = 15000
 if X_train.shape[1] > max_train_samples:
     X_train = X_train[:, :max_train_samples]
@@ -46,28 +36,22 @@ print(f"Training set: {X_train.shape[1]} examples")
 print(f"Validation set: {X_dev.shape[1]} examples")
 
 
-# activation functions for the neural network
 
 def relu(Z):
-    """relu activation function - returns max(0, z)"""
     return np.maximum(0, Z)
 
 
 def relu_derivative(Z):
-    """derivative of relu for backprop"""
     return (Z > 0).astype(float)
 
 
 def softmax(Z):
-    """softmax activation - converts scores to probabilities"""
     exp_Z = np.exp(Z - np.max(Z, axis=0, keepdims=True))
     return exp_Z / np.sum(exp_Z, axis=0, keepdims=True)
 
 
-# initialize weights and biases
 
 def initialize_parameters(hidden_size=128):
-    """create initial weights and biases for the network"""
     W1 = (np.random.randn(hidden_size, 784) * np.sqrt(2.0 / 784)).astype(np.float32)
     b1 = np.zeros((hidden_size, 1), dtype=np.float32)
     W2 = (np.random.randn(10, hidden_size) * np.sqrt(2.0 / hidden_size)).astype(np.float32)
@@ -75,10 +59,8 @@ def initialize_parameters(hidden_size=128):
     return W1, b1, W2, b2
 
 
-# forward propagation
 
 def forward_propagation(W1, b1, W2, b2, X):
-    """pass input through network to get predictions"""
     Z1 = W1.dot(X) + b1
     A1 = relu(Z1)
     Z2 = W2.dot(A1) + b2
@@ -86,29 +68,23 @@ def forward_propagation(W1, b1, W2, b2, X):
     return Z1, A1, Z2, A2
 
 
-# helper functions
 
 def one_hot_encode(Y):
-    """convert labels to one-hot vectors"""
     one_hot = np.zeros((10, Y.size))
     one_hot[Y, np.arange(Y.size)] = 1
     return one_hot
 
 
 def get_predictions(A2):
-    """get predicted digit from probabilities"""
     return np.argmax(A2, axis=0)
 
 
 def calculate_accuracy(predictions, Y):
-    """calculate accuracy percentage"""
     return np.mean(predictions == Y) * 100
 
 
-# backpropagation
 
 def backward_propagation(Z1, A1, A2, W2, X, Y, m):
-    """calculate gradients for weight updates"""
     one_hot_Y = one_hot_encode(Y)
     
     dZ2 = A2 - one_hot_Y
@@ -122,10 +98,8 @@ def backward_propagation(Z1, A1, A2, W2, X, Y, m):
     return dW1, db1, dW2, db2
 
 
-# update parameters
 
 def update_parameters(W1, b1, W2, b2, dW1, db1, dW2, db2, learning_rate):
-    """gradient descent update step"""
     W1 = W1 - learning_rate * dW1
     b1 = b1 - learning_rate * db1
     W2 = W2 - learning_rate * dW2
@@ -133,10 +107,8 @@ def update_parameters(W1, b1, W2, b2, dW1, db1, dW2, db2, learning_rate):
     return W1, b1, W2, b2
 
 
-# training function
 
 def train_network(X, Y, learning_rate=0.1, iterations=500, hidden_size=128):
-    """train the neural network using gradient descent"""
     m = X.shape[1]
     W1, b1, W2, b2 = initialize_parameters(hidden_size)
     
@@ -144,16 +116,12 @@ def train_network(X, Y, learning_rate=0.1, iterations=500, hidden_size=128):
     print(f"Learning rate: {learning_rate}\n")
     
     for i in range(iterations):
-        # Forward propagation
         Z1, A1, Z2, A2 = forward_propagation(W1, b1, W2, b2, X)
         
-        # Backward propagation
         dW1, db1, dW2, db2 = backward_propagation(Z1, A1, A2, W2, X, Y, m)
         
-        # Update parameters
         W1, b1, W2, b2 = update_parameters(W1, b1, W2, b2, dW1, db1, dW2, db2, learning_rate)
         
-        # Print progress
         if i % 50 == 0:
             predictions = get_predictions(A2)
             accuracy = calculate_accuracy(predictions, Y)
@@ -163,10 +131,8 @@ def train_network(X, Y, learning_rate=0.1, iterations=500, hidden_size=128):
     return W1, b1, W2, b2
 
 
-#visulaization functions
 
 def visualize_network_architecture():
-    """show the network structure diagram"""
     fig, ax = plt.subplots(figsize=(14, 8))
     ax.axis('off')
     ax.set_xlim(0, 10)
@@ -186,7 +152,7 @@ def visualize_network_architecture():
             ax.text(input_x - 1.2, y, '... 784 neurons ...', fontsize=9, va='center', weight='bold', 
                     bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.3))
     
-    hidden_neurons = 10  # Show 10 representative neurons for visualization
+    hidden_neurons = 10
     hidden_y_positions = np.linspace(1, 9, hidden_neurons)
     ax.text(hidden_x, 9.5, 'Hidden Layer\n(128 neurons)\nReLU Activation', ha='center', 
             fontsize=12, weight='bold', bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.7))
@@ -218,8 +184,8 @@ def visualize_network_architecture():
     ax.text(hidden_x, b2_y, 'b2', ha='center', va='center', fontsize=9, weight='bold', color='darkred')
     ax.text(hidden_x, b2_y - 0.4, '(10×1)', ha='center', fontsize=7, style='italic')
     
-    for in_y in input_y_positions:  # ALL input neurons shown
-        for hid_y in hidden_y_positions:  # Connect to ALL hidden neurons shown
+    for in_y in input_y_positions:
+        for hid_y in hidden_y_positions:
             ax.plot([input_x + 0.15, hidden_x - 0.2], [in_y, hid_y], 
                    'gray', alpha=0.25, linewidth=0.6)
     
@@ -230,8 +196,8 @@ def visualize_network_architecture():
     ax.text((input_x + hidden_x) / 2, 9.2, 'FULLY CONNECTED\n(All 784 → All 128)', 
             ha='center', fontsize=9, style='italic', color='darkblue', weight='bold')
     
-    for hid_y in hidden_y_positions:  # ALL hidden neurons
-        for out_y in output_y_positions:  # Connect to ALL output neurons
+    for hid_y in hidden_y_positions:
+        for out_y in output_y_positions:
             ax.plot([hidden_x + 0.2, output_x - 0.2], [hid_y, out_y], 
                    'gray', alpha=0.25, linewidth=0.6)
     
@@ -254,10 +220,6 @@ def visualize_network_architecture():
 
 
 def visualize_forward_propagation(X, W1, b1, W2, b2, sample_idx=0):
-    """
-    Visualize what happens during forward propagation
-    Shows: Input image → Hidden layer activations → Output probabilities
-    """
     X_sample = X[:, sample_idx:sample_idx+1]
     Z1, A1, Z2, A2 = forward_propagation(W1, b1, W2, b2, X_sample)
     
@@ -278,7 +240,7 @@ def visualize_forward_propagation(X, W1, b1, W2, b2, sample_idx=0):
     plt.colorbar(im2, ax=ax2, fraction=0.046)
     
     ax3 = fig.add_subplot(gs[0, 2])
-    Z1_values = Z1.flatten()[:10]  # Show first 10 neurons only
+    Z1_values = Z1.flatten()[:10]
     hidden_size = Z1.shape[0]
     bars3 = ax3.bar(range(10), Z1_values, color='steelblue', edgecolor='black')
     ax3.set_title(f'Hidden Layer Z1 (First 10/{hidden_size})\n(Before ReLU)', fontsize=12, weight='bold')
@@ -288,7 +250,7 @@ def visualize_forward_propagation(X, W1, b1, W2, b2, sample_idx=0):
     ax3.grid(axis='y', alpha=0.3)
     
     ax4 = fig.add_subplot(gs[0, 3])
-    A1_values = A1.flatten()[:10]  # Show first 10 neurons only
+    A1_values = A1.flatten()[:10]
     bars4 = ax4.bar(range(10), A1_values, color='green', edgecolor='black')
     ax4.set_title(f'Hidden Layer A1 (First 10/{hidden_size})\n(After ReLU)', fontsize=12, weight='bold')
     ax4.set_xlabel('Neuron')
@@ -354,10 +316,6 @@ def visualize_forward_propagation(X, W1, b1, W2, b2, sample_idx=0):
 
 
 def visualize_backpropagation(X, Y, W1, b1, W2, b2, sample_idx=0):
-    """
-    Visualize what happens during backpropagation
-    Shows: Gradients flowing backward through the network
-    """
     X_sample = X[:, sample_idx:sample_idx+1]
     Y_sample = Y[sample_idx:sample_idx+1]
     
@@ -419,7 +377,7 @@ def visualize_backpropagation(X, Y, W1, b1, W2, b2, sample_idx=0):
     plt.colorbar(im5, ax=ax5, fraction=0.046)
     
     ax6 = fig.add_subplot(gs[1, 2])
-    db1_values = db1.flatten()[:10]  # Show first 10 neurons only
+    db1_values = db1.flatten()[:10]
     hidden_size = db1.shape[0]
     bars6 = ax6.bar(range(10), db1_values, color='darkgreen', edgecolor='black')
     ax6.set_title(f'Gradient db1 (First 10/{hidden_size})\n(Bias update for hidden)', fontsize=12, weight='bold')
@@ -454,9 +412,6 @@ def visualize_backpropagation(X, Y, W1, b1, W2, b2, sample_idx=0):
 
 
 def visualize_weight_updates(W1_before, W2_before, W1_after, W2_after):
-    """
-    Visualize how weights change after one gradient descent step
-    """
     fig, axes = plt.subplots(2, 3, figsize=(15, 8))
     
     im1 = axes[0, 0].imshow(W1_before[:, :100], cmap='RdBu', aspect='auto', vmin=-1, vmax=1)
@@ -497,17 +452,11 @@ def visualize_weight_updates(W1_before, W2_before, W1_after, W2_after):
 
 
 def make_predictions(X, W1, b1, W2, b2):
-    """
-    Use trained network to predict digits
-    """
     _, _, _, A2 = forward_propagation(W1, b1, W2, b2, X)
     return get_predictions(A2)
 
 
 def visualize_prediction(index, X, Y, W1, b1, W2, b2):
-    """
-    Show an example prediction with the actual image
-    """
     current_image = X[:, index:index+1]
     
     prediction = make_predictions(current_image, W1, b1, W2, b2)[0]
@@ -526,7 +475,6 @@ def visualize_prediction(index, X, Y, W1, b1, W2, b2):
 
 
 def predict_custom_image(image_path, W1, b1, W2, b2):
-    """test handwritten digit from custom image file"""
     try:
         from PIL import Image
     except ImportError:
@@ -537,7 +485,6 @@ def predict_custom_image(image_path, W1, b1, W2, b2):
     img = img.resize((28, 28), Image.Resampling.LANCZOS)
     img_array = np.array(img).astype(np.float32)
     
-    # check if image has dark background (like mnist)
     if img_array.mean() > 127:
         img_array = 255 - img_array
     
