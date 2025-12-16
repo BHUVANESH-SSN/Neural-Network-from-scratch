@@ -166,7 +166,10 @@ b = b - α · db
 -  float32 data type (50% memory savings)
 -  Limited training samples (prevents overflow)
 -  He initialization for efficient training
+## ReLU Activation Unit
+<img width="988" height="563" alt="image" src="https://github.com/user-attachments/assets/c80ea603-0653-4ec6-841b-90a1f81dbfd8" />
 
+![ReLU](https://media.geeksforgeeks.org/wp-content/uploads/20250129162127770664/Relu-activation-function.png)
 ## 🎨 Visualizations
 
 The code generates multiple visualizations:
