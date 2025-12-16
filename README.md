@@ -175,10 +175,12 @@ b = b - α · db
 The code generates multiple visualizations:
 
 1. **Network Architecture**: Visual diagram of the network structure
-2. **Forward Propagation**: Step-by-step data flow through the network
-3. **Backpropagation**: Gradient calculation and error propagation
-4. **Weight Updates**: Before/after comparison of weight matrices
-5. **Predictions**: Individual digit predictions with confidence scores
+2. <img width="1910" height="947" alt="image" src="https://github.com/user-attachments/assets/d3096754-051c-46c4-b468-1c47c97e7f83" />
+
+3. **Forward Propagation**: Step-by-step data flow through the network
+4. **Backpropagation**: Gradient calculation and error propagation
+5. **Weight Updates**: Before/after comparison of weight matrices
+6. **Predictions**: Individual digit predictions with confidence scores
 
 ## 📚 Learning Resources
 
