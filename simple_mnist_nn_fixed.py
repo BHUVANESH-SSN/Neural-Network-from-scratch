@@ -30,15 +30,22 @@ np.random.shuffle(data)  # Shuffle to randomize data
 
 # Split into validation set (1000 examples)
 data_dev = data[0:1000].T  # Transpose so each column is one example
-Y_dev = data_dev[0]  # Labels (0-9)
-X_dev = data_dev[1:]  # Pixel values (784 pixels)
+Y_dev = data_dev[0].astype(np.int32)  # Labels (0-9)
+X_dev = data_dev[1:].astype(np.float32)  # Pixel values (784 pixels)
 X_dev = X_dev / 255.0  # Normalize to [0,1]
 
 # Split into training set (remaining examples)
 data_train = data[1000:].T
-Y_train = data_train[0]  # Labels
-X_train = data_train[1:]  # Pixel values
+Y_train = data_train[0].astype(np.int32)  # Labels
+X_train = data_train[1:].astype(np.float32)  # Pixel values
 X_train = X_train / 255.0  # Normalize
+
+# Use subset for memory efficiency (optional: increase to 20000 if you have more RAM)
+max_train_samples = 15000
+if X_train.shape[1] > max_train_samples:
+    X_train = X_train[:, :max_train_samples]
+    Y_train = Y_train[:max_train_samples]
+    print(f"Using {max_train_samples} training samples for memory efficiency")
 
 print(f"Training set: {X_train.shape[1]} examples")
 print(f"Validation set: {X_dev.shape[1]} examples")
@@ -93,10 +100,10 @@ def initialize_parameters(hidden_size=128):
     - b2: Biases for layer 2 (10 outputs × 1)
     - Using He initialization for better training with ReLU
     """
-    W1 = np.random.randn(hidden_size, 784) * np.sqrt(2.0 / 784)  # He initialization
-    b1 = np.zeros((hidden_size, 1))  # Start biases at zero
-    W2 = np.random.randn(10, hidden_size) * np.sqrt(2.0 / hidden_size)
-    b2 = np.zeros((10, 1))
+    W1 = (np.random.randn(hidden_size, 784) * np.sqrt(2.0 / 784)).astype(np.float32)  # He initialization
+    b1 = np.zeros((hidden_size, 1), dtype=np.float32)  # Start biases at zero
+    W2 = (np.random.randn(10, hidden_size) * np.sqrt(2.0 / hidden_size)).astype(np.float32)
+    b2 = np.zeros((10, 1), dtype=np.float32)
     return W1, b1, W2, b2
 
 
