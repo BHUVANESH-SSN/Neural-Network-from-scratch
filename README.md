@@ -178,9 +178,20 @@ The code generates multiple visualizations:
  <img width="1910" height="947" alt="image" src="https://github.com/user-attachments/assets/d3096754-051c-46c4-b468-1c47c97e7f83" />
 
 2. **Forward Propagation**: Step-by-step data flow through the network
+<img width="1912" height="921" alt="image" src="https://github.com/user-attachments/assets/d7f609d5-d52e-4b1d-9f76-b8c522468767" />
+
 3. **Backpropagation**: Gradient calculation and error propagation
+<img width="1776" height="932" alt="image" src="https://github.com/user-attachments/assets/f434bfa9-187f-42ee-96ea-f4c89701a529" />
+
 4. **Weight Updates**: Before/after comparison of weight matrices
+<img width="1898" height="950" alt="image" src="https://github.com/user-attachments/assets/4b6c0ddb-a64e-41b1-980c-57c64b13f966" />
 5. **Predictions**: Individual digit predictions with confidence scores
+   <img width="372" height="373" alt="image" src="https://github.com/user-attachments/assets/dd164897-f9dd-4fac-a30a-357a75327813" />
+   <img width="367" height="372" alt="image" src="https://github.com/user-attachments/assets/cdb51017-0875-49c7-8bb2-9c40a6e9f8f1" />
+   <img width="352" height="357" alt="image" src="https://github.com/user-attachments/assets/ce7483fd-2393-4954-896e-c144918ef56e" />
+
+
+
 
 ## 📚 Learning Resources
 
