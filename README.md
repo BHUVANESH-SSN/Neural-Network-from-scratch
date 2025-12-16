@@ -185,6 +185,7 @@ The code generates multiple visualizations:
 
 4. **Weight Updates**: Before/after comparison of weight matrices
 <img width="1898" height="950" alt="image" src="https://github.com/user-attachments/assets/4b6c0ddb-a64e-41b1-980c-57c64b13f966" />
+
 5. **Predictions**: Individual digit predictions with confidence scores
 <img width="372" height="373" alt="image" src="https://github.com/user-attachments/assets/dd164897-f9dd-4fac-a30a-357a75327813" />
 <img width="367" height="372" alt="image" src="https://github.com/user-attachments/assets/cdb51017-0875-49c7-8bb2-9c40a6e9f8f1" />
