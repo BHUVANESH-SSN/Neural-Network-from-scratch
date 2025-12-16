@@ -163,9 +163,9 @@ b = b - α · db
 - Reduce `max_train_samples` to 10,000
 
 **Memory optimizations (already implemented):**
-- ✅ float32 data type (50% memory savings)
-- ✅ Limited training samples (prevents overflow)
-- ✅ He initialization for efficient training
+-  float32 data type (50% memory savings)
+-  Limited training samples (prevents overflow)
+-  He initialization for efficient training
 
 ## 🎨 Visualizations
 
@@ -188,10 +188,6 @@ The code generates multiple visualizations:
 - Weight initialization (He initialization)
 - Loss calculation (Cross-entropy)
 
-**Recommended Reading:**
-- [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/) by Michael Nielsen
-- [Deep Learning Specialization](https://www.coursera.org/specializations/deep-learning) by Andrew Ng
-- [CS231n: Convolutional Neural Networks](http://cs231n.stanford.edu/)
 
 ## 🛠️ Customization
 
@@ -228,8 +224,8 @@ You can extend the network to have multiple hidden layers by modifying the forwa
 - Check if `plt.show()` is being called
 
 **Memory errors?**
-- ✅ Already optimized: Uses float32 instead of float64
-- ✅ Training set limited to 15,000 samples by default
+- Already optimized: Uses float32 instead of float64
+- Training set limited to 15,000 samples by default
 - To use more data: Increase `max_train_samples` in code (line ~48)
 - Decrease `hidden_size` if still facing issues
 - Close other memory-intensive applications
@@ -238,24 +234,9 @@ You can extend the network to have multiple hidden layers by modifying the forwa
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 👏 Acknowledgments
-
-- MNIST Dataset: Yann LeCun, Corinna Cortes, and Christopher J.C. Burges
-- Inspiration from Andrew Ng's Deep Learning course
-- NumPy community for excellent documentation
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-- Report bugs
-- Suggest new features
-- Improve documentation
-- Add more visualizations
-
 ## 📧 Contact
 
 For questions or suggestions, please open an issue on GitHub.
 
 ---
 
-**Made with ❤️ for learning neural networks from scratch**
