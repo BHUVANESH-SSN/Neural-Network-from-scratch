@@ -48,6 +48,7 @@ Input Layer (784 neurons) → Hidden Layer (128 neurons, ReLU) → Output Layer 
 - NumPy
 - Pandas
 - Matplotlib
+- pillow (For custom Images)
 
 ## 🚀 Installation
 
@@ -196,6 +197,37 @@ The code generates multiple visualizations:
 
 
 
+## 🖼️ Testing Custom Handwritten Digits
+
+### How Pillow Works
+
+Pillow (PIL) is a python image processing library that helps us work with custom images:
+
+**image processing steps:**
+1. **load image** - reads image files (png, jpg, bmp, etc.)
+2. **convert to grayscale** - converts color images to black and white
+3. **resize** - scales image to 28x28 pixels to match mnist format
+4. **convert to array** - transforms image into numpy array for processing
+5. **normalize** - scales pixel values from 0-255 to 0-1 range
+
+### Using Custom Images
+
+**installation:**
+```bash
+pip install pillow
+```
+## Image requirements:
+
+1. single digit centered in image
+2. white background with black digit (or vice versa)
+3. clear and bold handwriting
+4. any size (will be resized to 28x28)
+5. supported formats: jpg, png, bmp, gif
+## Example Test Results
+test image 1: handwritten "8"
+![8 Image](/digit.jpeg)
+## Test Prediction Results
+<img width="1600" height="761" alt="image" src="https://github.com/user-attachments/assets/09e88d0d-6787-4992-bfc2-58ca7425f5a2" />
 
 ## 📚 Learning Resources
 
