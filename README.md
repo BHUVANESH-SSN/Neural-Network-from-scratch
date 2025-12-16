@@ -54,14 +54,14 @@ Input Layer (784 neurons) → Hidden Layer (128 neurons, ReLU) → Output Layer 
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/mnist-neural-network.git
+git clone [https://github.com/yourusername/mnist-neural-network.git](https://github.com/BHUVANESH-SSN/Neural-Network-from-scratch.git)
 cd mnist-neural-network
 ```
 
 2. **Create a virtual environment (optional but recommended)**
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+source .venv/bin/activate  # on Windows: .venv\Scripts\activate
 ```
 
 3. **Install required packages**
@@ -100,6 +100,8 @@ NN_Scratch/
 ├── simple_mnist_nn_fixed.py  # Main neural network implementation
 ├── train.csv                 # MNIST training dataset
 ├── test.csv                  # MNIST test dataset (optional)
+├── digit.jpeg                # HandWritten image
+├── test_custom_image.py      # Test Your Own Custom Image 
 ├── sample_submission.csv     # Sample submission format
 └── README.md                 # This file
 ```
