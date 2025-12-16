@@ -286,10 +286,10 @@ def visualize_network_architecture():
         if i == input_neurons // 2:
             ax.text(input_x - 0.6, y, '... 784 neurons ...', fontsize=8, va='center')
     
-    # Draw Hidden Layer (10 neurons)
-    hidden_neurons = 10
+    # Draw Hidden Layer (show subset of neurons)
+    hidden_neurons = 10  # Show 10 representative neurons for visualization
     hidden_y_positions = np.linspace(1, 9, hidden_neurons)
-    ax.text(hidden_x, 9.5, 'Hidden Layer\n(10 neurons)\nReLU Activation', ha='center', 
+    ax.text(hidden_x, 9.5, 'Hidden Layer\n(128 neurons)\nReLU Activation', ha='center', 
             fontsize=12, weight='bold', bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.7))
     
     for i, y in enumerate(hidden_y_positions):
@@ -320,9 +320,9 @@ def visualize_network_architecture():
                    'gray', alpha=0.3, linewidth=0.8)
     
     # Add weight labels
-    ax.text((input_x + hidden_x) / 2, 0.3, 'W1: (10 × 784)\nb1: (10 × 1)', 
+    ax.text((input_x + hidden_x) / 2, 0.3, 'W1: (128 × 784)\nb1: (128 × 1)', 
             ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.5))
-    ax.text((hidden_x + output_x) / 2, 0.3, 'W2: (10 × 10)\nb2: (10 × 1)', 
+    ax.text((hidden_x + output_x) / 2, 0.3, 'W2: (10 × 128)\nb2: (10 × 1)', 
             ha='center', fontsize=10, bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.5))
     
     plt.title('Neural Network Architecture for MNIST Digit Recognition', 
@@ -358,21 +358,22 @@ def visualize_forward_propagation(X, W1, b1, W2, b2, sample_idx=0):
     ax2.set_ylabel('Hidden neurons')
     plt.colorbar(im2, ax=ax2, fraction=0.046)
     
-    # 3. Hidden Layer Pre-Activation (Z1)
+    # 3. Hidden Layer Pre-Activation (Z1) - show first 10 neurons
     ax3 = fig.add_subplot(gs[0, 2])
-    Z1_values = Z1.flatten()
+    Z1_values = Z1.flatten()[:10]  # Show first 10 neurons only
+    hidden_size = Z1.shape[0]
     bars3 = ax3.bar(range(10), Z1_values, color='steelblue', edgecolor='black')
-    ax3.set_title('Hidden Layer Z1\n(Before ReLU)', fontsize=12, weight='bold')
+    ax3.set_title(f'Hidden Layer Z1 (First 10/{hidden_size})\n(Before ReLU)', fontsize=12, weight='bold')
     ax3.set_xlabel('Neuron')
     ax3.set_ylabel('Value')
     ax3.axhline(y=0, color='r', linestyle='--', linewidth=1)
     ax3.grid(axis='y', alpha=0.3)
     
-    # 4. Hidden Layer Activation (A1)
+    # 4. Hidden Layer Activation (A1) - show first 10 neurons
     ax4 = fig.add_subplot(gs[0, 3])
-    A1_values = A1.flatten()
+    A1_values = A1.flatten()[:10]  # Show first 10 neurons only
     bars4 = ax4.bar(range(10), A1_values, color='green', edgecolor='black')
-    ax4.set_title('Hidden Layer A1\n(After ReLU)', fontsize=12, weight='bold')
+    ax4.set_title(f'Hidden Layer A1 (First 10/{hidden_size})\n(After ReLU)', fontsize=12, weight='bold')
     ax4.set_xlabel('Neuron')
     ax4.set_ylabel('Activation')
     ax4.grid(axis='y', alpha=0.3)
@@ -517,11 +518,12 @@ def visualize_backpropagation(X, Y, W1, b1, W2, b2, sample_idx=0):
     ax5.set_ylabel('Hidden neurons')
     plt.colorbar(im5, ax=ax5, fraction=0.046)
     
-    # 6. Gradient db1
+    # 6. Gradient db1 - show first 10 neurons
     ax6 = fig.add_subplot(gs[1, 2])
-    db1_values = db1.flatten()
+    db1_values = db1.flatten()[:10]  # Show first 10 neurons only
+    hidden_size = db1.shape[0]
     bars6 = ax6.bar(range(10), db1_values, color='darkgreen', edgecolor='black')
-    ax6.set_title('Gradient db1\n(Bias update for hidden)', fontsize=12, weight='bold')
+    ax6.set_title(f'Gradient db1 (First 10/{hidden_size})\n(Bias update for hidden)', fontsize=12, weight='bold')
     ax6.set_xlabel('Hidden neuron')
     ax6.set_ylabel('Gradient')
     ax6.axhline(y=0, color='black', linestyle='-', linewidth=1)

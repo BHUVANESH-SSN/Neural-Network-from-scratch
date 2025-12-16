@@ -108,7 +108,8 @@ NN_Scratch/
 ### 1. **Data Loading & Preprocessing**
 - Loads MNIST data from CSV
 - Normalizes pixel values from [0, 255] to [0, 1]
-- Splits into training (41,000) and validation (1,000) sets
+- Converts to float32 for memory efficiency
+- Splits into training (15,000) and validation (1,000) sets
 
 ### 2. **Forward Propagation**
 ```
@@ -138,17 +139,20 @@ b = b - α · db
 
 | Metric | Value |
 |--------|-------|
-| **Training Accuracy** | 85-92% |
-| **Validation Accuracy** | 83-90% |
-| **Training Time** | ~60-90 seconds |
+| **Training Accuracy** | 85-90% |
+| **Validation Accuracy** | 83-88% |
+| **Training Set Size** | 15,000 samples |
+| **Training Time** | ~30-50 seconds |
 | **Iterations** | 1000 |
 | **Learning Rate** | 0.15 |
 | **Hidden Neurons** | 128 |
+| **Data Type** | float32 (memory optimized) |
 
 ### Performance Tips
 
 **To increase accuracy:**
-- Increase `hidden_size` to 256 (93-95% accuracy)
+- Increase `max_train_samples` to 20,000-25,000 (if RAM allows)
+- Increase `hidden_size` to 256 (may need more RAM)
 - Increase `iterations` to 1500-2000
 - Try `learning_rate` between 0.1-0.2
 - Add a second hidden layer
@@ -156,7 +160,12 @@ b = b - α · db
 **To reduce training time:**
 - Decrease `iterations` to 500
 - Decrease `hidden_size` to 64
-- Use mini-batch gradient descent
+- Reduce `max_train_samples` to 10,000
+
+**Memory optimizations (already implemented):**
+- ✅ float32 data type (50% memory savings)
+- ✅ Limited training samples (prevents overflow)
+- ✅ He initialization for efficient training
 
 ## 🎨 Visualizations
 
@@ -219,9 +228,11 @@ You can extend the network to have multiple hidden layers by modifying the forwa
 - Check if `plt.show()` is being called
 
 **Memory errors?**
-- Reduce batch size
-- Decrease `hidden_size`
-- Use float32 instead of float64
+- ✅ Already optimized: Uses float32 instead of float64
+- ✅ Training set limited to 15,000 samples by default
+- To use more data: Increase `max_train_samples` in code (line ~48)
+- Decrease `hidden_size` if still facing issues
+- Close other memory-intensive applications
 
 ## 📝 License
 
